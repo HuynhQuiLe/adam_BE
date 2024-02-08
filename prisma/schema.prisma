@@ -1,0 +1,80 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model brands {
+  brand_id Int     @id @default(autoincrement())
+  brand    String? @db.VarChar(255)
+  logo     String? @db.Text
+  items    items[]
+}
+
+model roles {
+  role_id Int     @id @default(autoincrement())
+  role    String? @db.VarChar(255)
+  users   users[]
+}
+
+model users {
+  user_id       Int       @id @default(autoincrement()) @unique
+  full_name     String?   @db.VarChar(255)
+  email         String?   @db.VarChar(255)
+  pass_word     String?   @db.Text
+  avatar        String?   @db.Text
+  birthday      DateTime? @db.Date
+  role_id       Int?
+  gender        String?   @db.VarChar(255)
+  refresh_token String?   @db.Text
+  created_date  DateTime? @db.DateTime(0)
+  url           String?   @db.VarChar(255)
+  country       String?   @db.VarChar(255)
+  description   String?   @db.Text
+  deleted       Boolean?
+  items         items[]
+  social        social[] 
+  roles         roles?    @relation(fields: [role_id], references: [role_id], onDelete: NoAction, onUpdate: NoAction, map: "users_ibfk_1")
+
+  @@index([role_id], map: "role_id")
+}
+
+model social {
+  social_id Int     @id  @unique @default(autoincrement())
+  twitter   String? @db.VarChar(255)
+  facebook  String? @db.VarChar(255)
+  linkedin  String? @db.VarChar(255)
+  instagram String? @db.VarChar(255)
+  tiktok    String? @db.VarChar(255)
+  youtube   String? @db.VarChar(255)
+  user_id   Int? @unique
+  users     users?  @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction, map: "social_ibfk_1") 
+
+  @@index([user_id], map: "user_id") 
+}
+
+model code_verification {
+  code_id      Int       @id @default(autoincrement())
+  email        String?   @db.VarChar(255)
+  code_key     String?   @db.VarChar(255)
+  created_date DateTime? @db.DateTime(0)
+  verified     Boolean?
+}
+
+model items {
+  item_id      Int       @id @default(autoincrement())
+  brand_id     Int?
+  item_name    String?   @db.VarChar(255)
+  description  String?   @db.Text
+  created_date DateTime? @db.Date
+  user_id      Int?
+  model        String?   @db.VarChar(255)
+  brands       brands?   @relation(fields: [brand_id], references: [brand_id], onDelete: NoAction, onUpdate: NoAction, map: "items_ibfk_1")
+  users        users?    @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction, map: "items_ibfk_2")
+
+  @@index([brand_id], map: "brand_id")
+  @@index([user_id], map: "user_id")
+}

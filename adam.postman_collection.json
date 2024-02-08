@@ -1,0 +1,131 @@
+{
+	"info": {
+		"_postman_id": "da3e56ff-8124-4892-b4d5-002b6c955f2d",
+		"name": "adam",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14996985",
+		"_collection_link": "https://www.postman.com/lehuynhqui/workspace/le-huynh-qui/collection/14996985-da3e56ff-8124-4892-b4d5-002b6c955f2d?action=share&creator=14996985&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "AUTH - Register",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJfaWQiOjMsInJvbGUiOiJhZG1pbiJ9LCJpYXQiOjE3MDI5NjcwNTIsImV4cCI6MTcwMjk2NzY1Mn0.2-vwpjfcnZvRoFLdL7flsEuVdGJMATk66n4IOjHBnik",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\":\"admin@gmail.com\",\n    \"pass_word\": \"1\",\n    \"full_name\": \"Lê Huỳnh Quí\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}auth/register",
+					"host": [
+						"{{BASE_URL}}auth"
+					],
+					"path": [
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AUTH - Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"admin@gmail.com\",\n    \"pass_word\": \"1\"\n\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}auth/login",
+					"host": [
+						"{{BASE_URL}}auth"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "USER - Get user",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJfaWQiOjksImtleSI6MTcwNjE3NDIwOTY1Mn0sImlhdCI6MTcwNjE3NDIwOSwiZXhwIjoxNzA2MTc1MTA5fQ.CleYr5MIHbPyQOShLAAuCnnnUYFid8028C9V_1SRQak",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{BASE_URL}}user/get",
+					"host": [
+						"{{BASE_URL}}user"
+					],
+					"path": [
+						"get"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "USER - Update public profile",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJfaWQiOjksImtleSI6MTcwNjM0NjAwNzE5Mn0sImlhdCI6MTcwNjM0NjAwNywiZXhwIjoxNzA2MzQ2NjA3fQ.sRnfkmx8zJXNcbE58KDnl26v9787y73f8EctTadxqU4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"avatar\": \"https://bizweb.dktcdn.net/100/438/408/files/anime-nam-buon-yody-vn27.jpg?v=1705646103720\",\n    \"birthday\": \"1996-10-25T00:00:00.000Z\",\n    \"country\": \"Barbados\",\n    \"description\": null,\n    \"full_name\": \"Lê Huỳnh Quí\",\n    \"gender\": \"NAM\",\n    \"role_id\": 1,\n    \"url\": \"admin-qui\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}user/update-public-profile",
+					"host": [
+						"{{BASE_URL}}user"
+					],
+					"path": [
+						"update-public-profile"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "BASE_URL",
+			"value": "http://localhost:3000/"
+		}
+	]
+}
